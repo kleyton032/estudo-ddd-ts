@@ -6,7 +6,6 @@ interface AnswerProps {
     questionId: string,
 }
 
-
 export class Answer {
     public id: string
     public content: string
