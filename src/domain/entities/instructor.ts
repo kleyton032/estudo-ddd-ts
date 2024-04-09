@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto"
-import { Entity } from "../../core/entity"
+import { Entity } from "../../core/entities/entity"
 
 
 interface InstructorProps {
