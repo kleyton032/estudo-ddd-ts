@@ -3,24 +3,22 @@ import { Answer } from "../entities/answer"
 import { AnswerRepository } from "../repositories/answer-respository"
 
 interface AnswerQuestionUseCaseRequest {
-    instructorId: UniqueEntityID
-    questionId: UniqueEntityID
-    content: string,
-    createdAt: Date
-    updatedAt?: Date
+    instructorId: string
+    questionId: string
+    content: string
 }
 
 
 export class AnswerQuestionUseCase {
 
-    constructor(private answerRepository: AnswerRepository){}
+    constructor(private answerRepository: AnswerRepository) { }
 
-    async execute({ instructorId, questionId, content, createdAt }: AnswerQuestionUseCaseRequest) {
-        const answer = new Answer({
+    async execute({ instructorId, questionId, content }: AnswerQuestionUseCaseRequest) {
+
+        const answer = Answer.create({
             content,
-            authorId: instructorId,
-            questionId,
-            createdAt
+            authorId: new UniqueEntityID(instructorId),
+            questionId: new UniqueEntityID(questionId)
         })
 
         await this.answerRepository.create(answer)
